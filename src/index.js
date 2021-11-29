@@ -9,6 +9,10 @@ const port = 3000
 app.use(morgan('combined'))
 
 app.use(express.static(path.join(__dirname, 'public')))
+app.use(express.urlencoded({ 
+  extended: true
+}))
+app.use(express.json())
 
 app.engine('hbs', hbs.engine)
 app.set('view engine', 'hbs')
@@ -24,6 +28,11 @@ app.get('/blog/news', (req, res) => {
 
 app.get('/blog/search', (req, res) => {
   res.render('search');
+})
+
+app.post('/blog/search', (req, res) => {
+  console.log(req.body)
+  res.send('');
 })
 
 app.listen(port, () => {
